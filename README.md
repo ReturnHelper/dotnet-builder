@@ -4,6 +4,8 @@ Docker image for building .net core app on Amazon linux
 ## Packages available
 
 - dotnet-sdk-3.1
+- mono
+- nuget.exe
 - python3.7
 - pip3
 - aws
