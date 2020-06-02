@@ -6,7 +6,11 @@ COPY NuGet.Config ~/.nuget/NuGet/NuGet.Config
 
 RUN ln -s ~/.nuget/NuGet/NuGet.Config ~/.config/NuGet/NuGet.Config
 
-RUN yum install which wget -y
+RUN RUN yum install which wget tar gzip -y
+
+RUN yum install -y gcc-c++ make && \
+    curl -sL https://rpm.nodesource.com/setup_12.x | bash - && \
+    yum install nodejs -y
 
 RUN dotnet_ver=3.1 && \
     yum history sync && \    
@@ -15,7 +19,7 @@ RUN dotnet_ver=3.1 && \
 
 RUN yum install python3 -y && \
     curl -O https://bootstrap.pypa.io/get-pip.py && \
-    python3.7 get-pip.py --user && \
+    python3.7 get-pip.py --no-warn-script-location && \
     pip3 install awscli
 
 RUN mkdir -p /tmp/mono && \
@@ -30,6 +34,10 @@ RUN mkdir -p /tmp/mono && \
 
 RUN curl -o /usr/local/bin/nuget.exe https://dist.nuget.org/win-x86-commandline/latest/nuget.exe && \
     echo 'alias nuget="mono /usr/local/bin/nuget.exe"' >> ~/.bashrc
+
+RUN python3 --version && \
+    node -e "console.log('Running Node.js ' + process.version);" && \
+    dotnet --info
 
 CMD [ "dotnet","--info" ]
 
