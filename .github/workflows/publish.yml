@@ -3,16 +3,23 @@ on:
   push:
     tags:
       - 'v*.*.*'
+      - 'v*.*.*-rc-*'
 jobs:
   build: 
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+    - name: set var
+      id: setVar
+      run: |
+        echo ::set-output name=TAG::${GITHUB_REF#refs/tags/}
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ steps.setVar.outputs.TAG }}
     - name: Login
       run: |
         echo ${{ secrets.DOCKER_TOKEN }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
     - name: Build and push
       run: |
-        version=${GITHUB_REF/refs\/tags\//}
+        version=${{ steps.setVar.outputs.TAG }}
         docker build . -t returnhelper/dotnet-builder:$version
         docker push returnhelper/dotnet-builder:$version
