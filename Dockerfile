@@ -9,7 +9,7 @@ RUN ln -s ~/.nuget/NuGet/NuGet.Config ~/.config/NuGet/NuGet.Config
 RUN yum install which wget tar gzip -y
 
 RUN yum install -y gcc-c++ make && \
-    curl -sL https://rpm.nodesource.com/setup_12.x | bash - && \
+    curl -sL https://rpm.nodesource.com/setup_14.x | bash - && \
     yum install nodejs -y
 
 RUN dotnet_ver=3.1 && \
