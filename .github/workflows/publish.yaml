@@ -4,15 +4,16 @@ on:
     tags:
       - 'v*.*.*'
       - 'v*.*.*-rc-*'
+      - 'v*.*.*-beta-*'
 jobs:
   build: 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
     - name: set var
       id: setVar
       run: |
         echo ::set-output name=TAG::${GITHUB_REF#refs/tags/}
-        echo ::set-env name=RELEASE_VERSION::${GITHUB_REF#refs/*/}
+        echo "RELEASE_VERSION=$(echo ${GITHUB_REF#refs/*/})" >> $GITHUB_ENV
     - uses: actions/checkout@v2
       with:
         ref: ${{ steps.setVar.outputs.TAG }}
