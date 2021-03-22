@@ -12,7 +12,7 @@ RUN yum install -y gcc-c++ make && \
     curl -sL https://rpm.nodesource.com/setup_14.x | bash - && \
     yum install nodejs -y
 
-RUN dotnet_ver=3.1 && \
+RUN dotnet_ver=5.0 && \
     yum history sync && \    
     rpm -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm && \
     yum install dotnet-sdk-$dotnet_ver -y
