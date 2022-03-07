@@ -10,6 +10,7 @@ RUN yum install which wget tar gzip -y
 
 RUN yum install -y gcc-c++ make && \
     curl -sL https://rpm.nodesource.com/setup_14.x | bash - && \
+    curl -sL https://rpm.nodesource.com/setup_16.x | bash - && \
     yum install nodejs -y
 
 RUN dotnet_ver=5.0 && \
