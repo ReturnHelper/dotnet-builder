@@ -6,6 +6,8 @@ COPY NuGet.Config /root/.nuget/NuGet/NuGet.Config
 
 RUN ln -s /root/.nuget/NuGet/NuGet.Config /root/.config/NuGet/NuGet.Config
 
+RUN yum update -y
+
 RUN yum install which wget tar gzip libicu60 -y 
 
 RUN yum install -y gcc-c++ make && \
