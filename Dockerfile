@@ -18,6 +18,8 @@ RUN curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin -c 6.0
 
 ENV PATH="${PATH}:/root/.dotnet"
 
+RUN dotnet tool install Nuke.GlobalTool --global
+
 RUN yum install python3 -y && \
     curl -O https://bootstrap.pypa.io/get-pip.py && \
     python3.7 get-pip.py --no-warn-script-location && \
