@@ -6,6 +6,8 @@ COPY NuGet.Config /root/.nuget/NuGet/NuGet.Config
 
 RUN ln -s /root/.nuget/NuGet/NuGet.Config /root/.config/NuGet/NuGet.Config
 
+RUN yum update -y
+
 RUN yum install which wget tar gzip libicu60 -y 
 
 RUN yum install -y gcc-c++ make && \
@@ -15,6 +17,8 @@ RUN yum install -y gcc-c++ make && \
 RUN curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin -c 6.0
 
 ENV PATH="${PATH}:/root/.dotnet"
+
+RUN dotnet tool install Nuke.GlobalTool --global
 
 RUN yum install python3 -y && \
     curl -O https://bootstrap.pypa.io/get-pip.py && \

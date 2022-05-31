@@ -23,8 +23,9 @@ jobs:
     - name: Build and push
       run: |
         version=${{ steps.setVar.outputs.TAG }}
-        docker build . -t returnhelper/dotnet-builder:$version
+        docker build -t returnhelper/dotnet-builder:$version -t returnhelper/dotnet-builder:latest .
         docker push returnhelper/dotnet-builder:$version
+        docker push returnhelper/dotnet-builder:latest
     - name: publish
       uses: actions/create-release@v1
       env:
